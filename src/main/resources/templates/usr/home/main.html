@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>날씨 정보</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to top, #87ceeb, #f0f8ff);
+        }
+
+        .weather-container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            width: 70%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 8px 12px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .info {
+            color: #444;
+            font-size: 18px;
+            margin: 5px 0;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="weather-container">
+    <form action="/usr/home/main" method="get">
+        <input type="text" name="city" placeholder="도시 입력" required autocomplete="off">
+        <button type="submit">검색</button>
+    </form>
+
+    <div th:if="${temperature != null}">
+        <h2>도시 : <span th:text="${city}"></span></h2>
+        <p class="info">온도 : <span th:text="${temperature}"></span> °C</p>
+        <p class="info">습도 : <span th:text="${humidity}"></span>%</p>
+        <p class="info">풍속 : <span th:text="${windSpeed}"></span> m/s</p>
+    </div>
+
+    <div th:if="${error != null}">
+        <p class="error" th:text="${error}"></p>
+    </div>
+</div>
+</body>
+</html>
